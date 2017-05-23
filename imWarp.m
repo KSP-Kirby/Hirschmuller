@@ -6,6 +6,7 @@ function Iout = imWarp(I, D)
 
 
     [m,n] = size(D);
+    Iout = zeros(size(I));
 
     for i = 1:m
         for j = 1:n

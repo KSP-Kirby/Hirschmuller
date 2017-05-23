@@ -1,4 +1,4 @@
-function [ P, P1, P2, P3, h ] = HH( I1, I2 )
+function [ P, P1, P2, P3, h ] = HH( I1, I2, D )
     % Implements Hirchmuller per the paper "Stereo Processing by Semi-Global
     % Matching and Mutual Information
     %
@@ -35,7 +35,9 @@ function [ P, P1, P2, P3, h ] = HH( I1, I2 )
     % Compute an initial guess of disparity, should also try using a random
     % field per the paper
     numDisparities = 64;
-    D = disparity(rgb2gray(I1),rgb2gray(I2), 'Method','SemiGlobal', 'DisparityRange',[0 numDisparities],'BlockSize',17 );
+    if nargin == 2
+        D = disparity(rgb2gray(I1),rgb2gray(I2), 'Method','SemiGlobal', 'DisparityRange',[0 numDisparities],'BlockSize',17 );
+    end
     
     % check disparity map
     % imtool(D/64);
@@ -56,7 +58,6 @@ function [ P, P1, P2, P3, h ] = HH( I1, I2 )
     % Iq = Ib;
     
     % This is the counting done in (6)
-    % this is faster than the method below, but the method 
     maxIntensity = 256;
     numCorrPix = 0;
     h = waitbar(0, 'Computing joint probability')
@@ -96,5 +97,6 @@ function [ P, P1, P2, P3, h ] = HH( I1, I2 )
     
     P3 = -log(P2);    
     h = imgaussfilt(P3,sigma_G);
+    
 end
 

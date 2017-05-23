@@ -1,0 +1,2 @@
+tsuk1 = imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col1.ppm');
+tsuk5 = imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col5.ppm');
