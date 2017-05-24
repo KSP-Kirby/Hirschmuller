@@ -21,4 +21,3 @@ function Iout = blobFilter(fp)
     end
     Iout = logical(out).*fp;
 end
-
