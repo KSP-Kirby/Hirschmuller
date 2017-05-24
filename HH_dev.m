@@ -9,15 +9,20 @@ fullImage = 0;
 %I2 = rgb2gray(imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col5.ppm'));
 %disparity_GT = imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\truedisp.row3.col3.pgm');
 
+% open left image
 [filename, pathname] = uigetfile('*.*', 'Select first image');
 I1 = rgb2gray(imread(fullfile(pathname, filename)));
 
+% open right image
 [filename, pathname] = uigetfile('*.*', 'Select second image');
 I2 = rgb2gray(imread(fullfile(pathname, filename)));
 
-% get initial disparity estimate
-numDisparities = 64;
-D = disparity(I1,I2, 'Method','SemiGlobal', 'DisparityRange',[0 numDisparities],'BlockSize',17 );
+% open disparity filw
+[filename, pathname] = uigetfile('*.*', 'Select disparity file');
+D = load(fullfile(pathname, filename));
+% or compute disparity
+% numDisparities = 64;
+% D = disparity(I1,I2, 'Method','SemiGlobal', 'DisparityRange',[0 numDisparities],'BlockSize',17 );
 
 % if first pass use this
 %load('disparityEstimateTsukuba.mat')
@@ -36,6 +41,7 @@ D = disparity(I1,I2, 'Method','SemiGlobal', 'DisparityRange',[0 numDisparities],
 %load('entropyEstimateTsukubaWithSigma.mat')
 %h = h_sigma_of_7;
 
+D = D.D     %Not sure how this became a struct, may need to remove this for future work
 I2w = imWarp(I2,D);            % TODO: implement linear interpolation in imWarp
 % verify warp
 imtool(imfuse(I1,I2w))
@@ -46,7 +52,12 @@ imtool(imfuse(I1,I2w))
 % plot(I2w(214,:))
 % hold off
 
-h = computeEntropy(I1, I2w);
+% load Entropy file
+[filename, pathname] = uigetfile('*.*', 'Select entropy file');
+h = load(fullfile(pathname, filename));
+h = h.h;    % this seems to have something to do with the way disprity and entropy were saved
+% or compute entropy
+% h = computeEntropy(I1, I2w);
 
 [m,n] = size(I1);
 startLine = 1;
@@ -63,7 +74,7 @@ fp_RL = HH_GC_baseImageIsRightImage(I1(startLine:endLine,:), I2(startLine:endLin
 % end
 
 [m,n] = size(I1(startLine:endLine,:));
-dispGT = reshape(disparity_GT(startLine:endLine,:)',m*n, 1);
+%dispGT = reshape(disparity_GT(startLine:endLine,:)',m*n, 1);
 
 % figure
 % plot(fp,'b')
