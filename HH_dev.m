@@ -5,29 +5,29 @@
 fullImage = 0;
 
 % first get my images
-I1 = rgb2gray(imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col1.ppm'));
-I2 = rgb2gray(imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col5.ppm'));
-disparity_GT = imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\truedisp.row3.col3.pgm');
+%I1 = rgb2gray(imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col1.ppm'));
+%I2 = rgb2gray(imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col5.ppm'));
+%disparity_GT = imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\truedisp.row3.col3.pgm');
 
-% [filename, pathname] = uigetfile('*.*', 'Select first image');
-% I1 = rgb2gray(imread(fullfile(pathname, filename)));
-% 
-% [filename, pathname] = uigetfile('*.*', 'Select second image');
-% I2 = rgb2gray(imread(fullfile(pathname, filename)));
+[filename, pathname] = uigetfile('*.*', 'Select first image');
+I1 = rgb2gray(imread(fullfile(pathname, filename)));
+
+[filename, pathname] = uigetfile('*.*', 'Select second image');
+I2 = rgb2gray(imread(fullfile(pathname, filename)));
 
 % get initial disparity estimate
 numDisparities = 64;
-% D = disparity(I1,I2, 'Method','SemiGlobal', 'DisparityRange',[0 numDisparities],'BlockSize',17 );
+D = disparity(I1,I2, 'Method','SemiGlobal', 'DisparityRange',[0 numDisparities],'BlockSize',17 );
 
 % if first pass use this
-load('disparityEstimateTsukuba.mat')
+%load('disparityEstimateTsukuba.mat')
 
 % if second pass use the following two lines
 %load('disparityEstimateTsukuba2.mat')
 %D = fp;
 
 %if first pass use the following line
-load('entropyEstimateTsukuba1.mat')
+%load('entropyEstimateTsukuba1.mat')
 
 %if second pass use the following two lines
 %load('entropyEstimateTsukuba2.mat')
@@ -46,7 +46,7 @@ imtool(imfuse(I1,I2w))
 % plot(I2w(214,:))
 % hold off
 
-%h = computeEntropy(I1, I2w);
+h = computeEntropy(I1, I2w);
 
 [m,n] = size(I1);
 startLine = 1;
