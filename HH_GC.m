@@ -16,7 +16,7 @@ function [fp] = HH_GC(I1, I2, Di1i2)
 %
 % base image is left image
 
-    addpath('C:\Users\Richard\Documents\MATLAB\gco-v3.0\matlab')      % This is where the Veksler/Delong Matlab wrapper is on my computer, change if needed.
+    addpath('C:\Users\rkirby\Documents\MATLAB\gco-v3.0\matlab')      % This is where the Veksler/Delong Matlab wrapper is on my computer, change if needed.
     
     if size(I1) ~= size(I2)
         disp('Images must be the same size')

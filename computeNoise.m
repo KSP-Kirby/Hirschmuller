@@ -1,4 +1,5 @@
-Isub = I1(145:261,238:440);
+Isub1 = I1(145:261,238:440);
+Isub = Isub1(106:115,47:55);
 
 [m,n] = size(Isub);
 
@@ -12,4 +13,4 @@ for i = 1:m
     end
 end
 mean(v)
-std(v)
+std(double(v))

@@ -17,7 +17,7 @@ I1 = rgb2gray(imread(fullfile(pathname, filename)));
 [filename, pathname] = uigetfile('*.*', 'Select second image');
 I2 = rgb2gray(imread(fullfile(pathname, filename)));
 
-% open disparity filw
+% open disparity file
 [filename, pathname] = uigetfile('*.*', 'Select disparity file');
 D = load(fullfile(pathname, filename));
 % or compute disparity
