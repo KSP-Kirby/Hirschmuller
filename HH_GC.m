@@ -16,7 +16,7 @@ function [fp] = HH_GC(I1, I2, Di1i2)
 %
 % base image is left image
 
-    addpath('C:\Users\rkirby\Documents\MATLAB\gco-v3.0\matlab')      % This is where the Veksler/Delong Matlab wrapper is on my computer, change if needed.
+    addpath('C:\Users\Richard\Documents\MATLAB\gco-v3.0\matlab')      % This is where the Veksler/Delong Matlab wrapper is on my computer, change if needed.
     
     if size(I1) ~= size(I2)
         disp('Images must be the same size')
@@ -56,6 +56,7 @@ function [fp] = HH_GC(I1, I2, Di1i2)
         for j = 1:n
             for k = 1:numLabels
                 if j-labels(k) >= 1
+                    %disp(strcat('i:',num2str(i),' j:',num2str(j)))
                     intensityOfPixelLeftImage = I1(i,j);
                     intensityOfPixelRightImage = I2(i,j-labels(k));
                     cost = Di1i2(intensityOfPixelLeftImage+1, intensityOfPixelRightImage+1);
