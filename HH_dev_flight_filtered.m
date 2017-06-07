@@ -5,17 +5,17 @@
 fullImage = 0;
 
 % first get my images
-%I1 = rgb2gray(imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col1.ppm'));
-%I2 = rgb2gray(imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\scene1.row3.col5.ppm'));
+I1 = (imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\J1_valid_filtered.png'));
+I2 = (imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\J2_valid_filtered.png'));
 %disparity_GT = imread('C:\Users\Richard\Documents\Projects\Sarcos\hirchmuller\tsukuba\truedisp.row3.col3.pgm');
 
 % open left image
-[filename, pathname] = uigetfile('*.*', 'Select first image');
-I1 = rgb2gray(imread(fullfile(pathname, filename)));
+% [filename, pathname] = uigetfile('*.*', 'Select first image');
+% I1 = rgb2gray(imread(fullfile(pathname, filename)));
 
 % open right image
-[filename, pathname] = uigetfile('*.*', 'Select second image');
-I2 = rgb2gray(imread(fullfile(pathname, filename)));
+% [filename, pathname] = uigetfile('*.*', 'Select second image');
+% I2 = rgb2gray(imread(fullfile(pathname, filename)));
 
 % open disparity filw
 [filename, pathname] = uigetfile('*.*', 'Select disparity file');
@@ -41,7 +41,7 @@ D = load(fullfile(pathname, filename));
 %load('entropyEstimateTsukubaWithSigma.mat')
 %h = h_sigma_of_7;
 
-D = D.D     %Not sure how this became a struct, may need to remove this for future work
+D = D.disparityMap     %Not sure how this became a struct, may need to remove this for future work
 I2w = imWarp(I2,D);            % TODO: implement linear interpolation in imWarp
 % verify warp
 imtool(imfuse(I1,I2w))
