@@ -40,7 +40,7 @@ function [h] = computeEntropy( I1, I2w )
     % calls this P0 (the '0' is a superscript).
     P = P/numCorrPix;
     
-    sigma_G = 0.5;
+    sigma_G = 7;
     % Kim calls this 'P' (equation (10))
     P1 = imgaussfilt(P,sigma_G);
     
